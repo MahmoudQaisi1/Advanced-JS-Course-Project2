@@ -132,7 +132,8 @@ class Task{
     }
 
     static deleteATask(i){
-        if (this.#tasks.length >= i) {
+        console.log(i);
+        if (i <= this.#tasks.length) {
             console.log("deleting..");
             this.#tasks[i-1].print(i);
             this.#tasks.splice(i-1,1);
@@ -189,6 +190,7 @@ Select an action:
 8) Clear all tasks
 ***************************
 What's your choice? (Enter 'exit' to exit)\n`
+
     const readline = require("readline")
 
     const rl = readline.createInterface({
@@ -243,11 +245,11 @@ What's your choice? (Enter 'exit' to exit)\n`
                     case 5:
                         let del = await new Promise((resolve)=>{
                             Task.listAllTasks();
-                            rl.question("What Task do you wish to delete?\n", (answer) => {
+                            rl.question("which Task do you wish to delete?\n", (answer) => {
                                 resolve(parseInt(answer));
                               });
                         });
-                        Task.deleteATask()
+                        Task.deleteATask(del);
                         break;
                     case 6:
                         Task.sortByDueDate();
